@@ -1,5 +1,6 @@
 import { Button, InputField } from "../components";
 import Logo from "../assets/Travelly_logo.svg";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -14,7 +15,7 @@ const Register = () => {
       >
         <img src={Logo} className="h-16 mb-[99px]" />
         <form className="flex flex-col gap-y-4">
-          <div className="flex gap-x-1">
+          <div className="flex gap-x-2">
             <InputField
               type="text"
               placeholder="아이디를 입력하세요"
@@ -42,7 +43,9 @@ const Register = () => {
             buttonStyle="bg-main p-6 w-[400px] text-point text-[20px] font-normal"
           />
         </form>
-        <a className="mt-[73px]">계정이 있으신가요?</a>
+        <Link to="/" className="mt-[90px] text-sm text-point">
+          계정이 있으신가요?
+        </Link>
       </section>
     </main>
   );

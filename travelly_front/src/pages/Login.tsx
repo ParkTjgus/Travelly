@@ -1,5 +1,6 @@
 import { Button, InputField } from "../components";
 import Logo from "../assets/Travelly_logo.svg";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -30,7 +31,9 @@ const Login = () => {
             buttonStyle="bg-main p-6 w-[400px] text-point text-[20px] font-normal"
           />
         </form>
-        <a className="mt-[90px]">계정이 없으신가요?</a>
+        <Link to="/register" className="mt-[90px] text-sm text-point">
+          계정이 없으신가요?
+        </Link>
       </section>
     </main>
   );
