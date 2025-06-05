@@ -2,7 +2,7 @@ import type { IconProps } from "./Icon";
 import Icon from "./Icon";
 
 interface ButtonIconProps extends IconProps {
-  location?: "left" | "right";
+  location: "left" | "right";
 }
 
 interface ButtonProps {
