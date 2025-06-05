@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons";
 import * as Fa6Icons from "react-icons/fa6";
 
-interface IconProps {
+export interface IconProps {
   iconName: string;
   size?: number;
   color?: string;
