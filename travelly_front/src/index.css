@@ -17,9 +17,10 @@ body,
   font-family: "Noto Sans", "Noto Sans KR", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  letter-spacing: -0.03em;
 
   color-scheme: light dark;
-  background-color: #242424;
+  background-color: white;
 }
 
 a {
@@ -35,9 +36,8 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+main {
+  padding: 40px 72px;
 }
 
 button {
