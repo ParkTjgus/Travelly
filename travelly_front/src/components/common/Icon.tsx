@@ -9,6 +9,9 @@ export interface IconProps {
 
 const IconList: Record<string, keyof typeof Octicons> = {
   email: "GoMail",
+  right: "GoChevronRight",
+  left: "GoChevronLeft",
+  down: "GoTriangleDown",
 };
 
 const Icon = (props: IconProps) => {

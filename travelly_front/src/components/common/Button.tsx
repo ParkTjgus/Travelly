@@ -7,7 +7,7 @@ interface ButtonIconProps extends IconProps {
 
 interface ButtonProps {
   type: "submit" | "reset" | "button";
-  label: string;
+  label?: string;
   buttonStyle?: string;
   disabled?: boolean;
   onActionClick?: () => void;

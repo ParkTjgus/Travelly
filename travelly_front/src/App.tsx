@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Login, Register } from "./pages";
+import { Login, NewTravel, Register } from "./pages";
 import HeaderLayout from "./components/common/Header";
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
 
           {/* ✅ 헤더가 포함된 나머지 모든 페이지 */}
           <Route element={<HeaderLayout />}>
-            {/* 필요 시 추가 라우트 여기에 */}
+            <Route path="/newTravel" element={<NewTravel />} />
           </Route>
         </Routes>
       </BrowserRouter>
