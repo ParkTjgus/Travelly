@@ -74,4 +74,18 @@ export class TravelService {
       throw new CustomError(404, "NOT_FOUND", "삭제할 여행이 없습니다.");
     return removed;
   }
+
+  async removeTravelerByUserId(travelId: string, userId: string) {
+    const user = await UserModel.findOne({ id: userId });
+    if (!user) {
+      throw new CustomError(404, "NOT_FOUND", "사용자를 찾을 수 없습니다.");
+    }
+
+    const updated = await this.repository.removeTraveler(travelId, user._id);
+    if (!updated) {
+      throw new CustomError(404, "NOT_FOUND", "여행을 찾을 수 없습니다.");
+    }
+
+    return updated;
+  }
 }

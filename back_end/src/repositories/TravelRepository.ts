@@ -30,4 +30,13 @@ export class TravelRepository {
   async remove(travelId: string) {
     return await TravelModel.findOneAndDelete({ id: travelId });
   }
+
+  async removeTraveler(travelId: string, userObjectId: Types.ObjectId) {
+    const updated = await TravelModel.findOneAndUpdate(
+      { id: travelId },
+      { $pull: { travelers: userObjectId } },
+      { new: true }
+    );
+    return updated;
+  }
 }

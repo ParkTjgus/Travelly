@@ -35,6 +35,10 @@ class TravelRoutes {
       this.controller.addTraveler(req, res, next)
     );
 
+    this.router.delete("/:travelId/travelers/:userId", (req, res, next) =>
+      this.controller.removeTraveler(req, res, next)
+    );
+
     return this.router;
   }
 }

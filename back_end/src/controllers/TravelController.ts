@@ -77,4 +77,17 @@ export class TravelController {
       next(err);
     }
   }
+
+  async removeTraveler(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { travelId, userId } = req.params;
+      const updated = await this.travelService.removeTravelerByUserId(
+        travelId,
+        userId
+      );
+      res.json(new CustomResponse(true, updated, null));
+    } catch (err) {
+      next(err);
+    }
+  }
 }
