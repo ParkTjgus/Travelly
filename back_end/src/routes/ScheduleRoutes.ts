@@ -14,7 +14,7 @@ export class ScheduleRoutes {
     this.router.post("/", this.controller.createSchedule);
     this.router.put("/:id", this.controller.updateSchedule);
     this.router.delete("/:id", this.controller.deleteSchedule);
-    this.router.get("/travel/:travelId", this.controller.getSchedulesByTravel);
+    this.router.get("/travel/:travelId", this.controller.getSchedules);
     return this.router;
   }
 }

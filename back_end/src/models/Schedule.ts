@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-class ScheduleModelClass {
+class Schedule {
   private schema = new mongoose.Schema({
     travelId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -16,4 +16,4 @@ class ScheduleModelClass {
   public model = mongoose.model("Schedule", this.schema);
 }
 
-export const ScheduleModel = new ScheduleModelClass().model;
+export const ScheduleModel = new Schedule().model;
