@@ -9,11 +9,7 @@ export class AuthService {
   async signin(id: string, password: string) {
     const user = await this.userRepository.findById(id);
     if (!user) {
-      throw new CustomError(
-        404,
-        "USER_NOT_FOUND",
-        "존재하지 않는 사용자입니다."
-      );
+      throw new CustomError(404, "NOT_FOUND", "존재하지 않는 사용자입니다.");
     }
 
     if (user.password !== password) {
@@ -30,11 +26,7 @@ export class AuthService {
   async signup(id: string, password: string, name: string) {
     const existing = await UserModel.findOne({ id });
     if (existing)
-      throw new CustomError(
-        409,
-        "USER_ALREADY_EXISTS",
-        "이미 등록된 사용자입니다."
-      );
+      throw new CustomError(409, "ALREADY_EXISTS", "이미 등록된 사용자입니다.");
 
     const hashed = await bcrypt.hash(password, 10);
     const newUser = new UserModel({ id, password: hashed, name });
@@ -47,7 +39,7 @@ export class AuthService {
     if (!deleted) {
       throw new CustomError(
         404,
-        "USER_NOT_FOUND",
+        "NOT_FOUND",
         "사용자 탈퇴 실패: 존재하지 않는 사용자입니다."
       );
     }
