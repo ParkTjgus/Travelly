@@ -13,10 +13,14 @@ export class TravelService {
     travelName: string,
     location: string
   ) {
+    const user = await UserModel.findOne({ id: userId });
+    if (!user)
+      throw new CustomError(404, "NOT_FOUND", "사용자를 찾을 수 없습니다.");
+
     const newTravel = await this.repository.create({
       id: new mongoose.Types.ObjectId().toString(),
       name: travelName,
-      travelers: [userId],
+      travelers: [user._id],
       location,
       startDate,
       endDate,
@@ -26,9 +30,11 @@ export class TravelService {
   }
 
   async getTravels(userId: string) {
-    return await this.repository.findByUserId(
-      new mongoose.Types.ObjectId(userId)
-    );
+    const user = await UserModel.findOne({ id: userId });
+    if (!user)
+      throw new CustomError(404, "NOT_FOUND", "사용자를 찾을 수 없습니다.");
+
+    return await this.repository.findByUserId(user._id);
   }
 
   async getTravelById(travelId: string) {

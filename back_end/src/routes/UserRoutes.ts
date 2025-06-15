@@ -1,4 +1,4 @@
-import express, { Router, RequestHandler } from "express";
+import express, { Router } from "express";
 import { UserController } from "../controllers/UserController.js";
 
 class UserRoutes {
