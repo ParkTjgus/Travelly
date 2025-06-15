@@ -1,5 +1,5 @@
 import express, { Router, RequestHandler } from "express";
-import { UserController } from "../controllers/UserController";
+import { UserController } from "../controllers/UserController.js";
 
 class UserRoutes {
   private controller: UserController;
