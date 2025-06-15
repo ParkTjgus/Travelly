@@ -12,7 +12,8 @@ export class AuthService {
       throw new CustomError(404, "NOT_FOUND", "존재하지 않는 사용자입니다.");
     }
 
-    if (user.password !== password) {
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
       throw new CustomError(
         401,
         "INVALID_PASSWORD",
