@@ -1,4 +1,5 @@
 import express from "express";
+import { Request, Response, NextFunction } from "express";
 
 import { AuthRoutes } from "./routes/AuthRoutes.js";
 import { UserRoutes } from "./routes/UserRoutes.js";
@@ -12,11 +13,21 @@ import { TravelController } from "./controllers/TravelController.js";
 import { ScheduleController } from "./controllers/ScheduleController.js";
 import { InvitationController } from "./controllers/InvitationController.js";
 
-import { connectDB } from "./utils/db.js";
+// Services
 import { AuthService } from "./services/AuthService.js";
-import { UserRepository } from "./repositories/UserRepository.js";
+import { UserService } from "./services/UserService.js";
+import { TravelService } from "./services/TravelService.js";
+import { ScheduleService } from "./services/ScheduleService.js";
+import { InvitationService } from "./services/InvitationService.js";
 
-import { Request, Response, NextFunction } from "express";
+// Repositories
+import { UserRepository } from "./repositories/UserRepository.js";
+import { TravelRepository } from "./repositories/TravelRepository.js";
+import { ScheduleRepository } from "./repositories/ScheduleRepository.js";
+import { InvitationRepository } from "./repositories/InvitationRepository.js";
+
+// utility
+import { connectDB } from "./utils/db.js";
 import { errorHandler } from "./utils/ErrorHandler.js";
 
 await connectDB(); // 서버 실행 전 DB 연결
@@ -26,20 +37,24 @@ app.use(express.json());
 
 // Services
 const authService = new AuthService(new UserRepository());
-// const userService;
+const userService = new UserService(new UserRepository());
+const travelService = new TravelService(new TravelRepository());
+const scheduleService = new ScheduleService(new ScheduleRepository());
+const invitationService = new InvitationService(new InvitationRepository());
 
 // Controllers
 const authController = new AuthController(authService);
+const userController = new UserController(userService);
+const travelController = new TravelController(travelService);
+const scheduleController = new ScheduleController(scheduleService);
+const invitationController = new InvitationController(invitationService);
 
 // Routes
 app.use("/auth", new AuthRoutes(authController).routes);
-// app.use("/users", new UserRoutes(new UserController()).routes);
-// app.use("/travels", new TravelRoutes(new TravelController()).routes);
-// app.use("/schedules", new ScheduleRoutes(new ScheduleController()).routes);
-// app.use(
-//   "/invitations",
-//   new InvitationRoutes(new InvitationController()).routes
-// );
+app.use("/users", new UserRoutes(userController).routes);
+app.use("/travels", new TravelRoutes(travelController).routes);
+app.use("/schedules", new ScheduleRoutes(scheduleController).routes);
+app.use("/invitations", new InvitationRoutes(invitationController).routes);
 
 // Error Handler
 app.use(
