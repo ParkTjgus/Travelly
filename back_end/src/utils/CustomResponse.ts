@@ -9,7 +9,7 @@ export class CustomResponse {
   constructor(
     success: boolean,
     data: any,
-    error: { code: string; details: string } | null
+    error: { code: string; details: string } | null = null
   ) {
     this.success = success;
     this.data = data;
