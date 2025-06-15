@@ -9,7 +9,8 @@ export class UserController {
     try {
       const { id } = req.params;
       const user = await this.service.getUser(id);
-      res.json(user);
+      const response = new CustomResponse(true, user, null);
+      res.status(200).json(response);
     } catch (err) {
       next(err);
     }
