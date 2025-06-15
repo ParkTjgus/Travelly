@@ -11,8 +11,9 @@ class UserRoutes {
   }
 
   get routes(): Router {
-    const c = this.controller;
-    this.router.get("/:id", c.getUserById.bind(c) as RequestHandler);
+    this.router.get("/:id", (req, res, next) =>
+      this.controller.getUserById(req, res, next)
+    );
     return this.router;
   }
 }
