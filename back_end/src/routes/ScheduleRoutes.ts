@@ -1,4 +1,4 @@
-import express, { Router, RequestHandler } from "express";
+import express, { Router } from "express";
 import { ScheduleController } from "../controllers/ScheduleController";
 
 export class ScheduleRoutes {
@@ -11,10 +11,21 @@ export class ScheduleRoutes {
   }
 
   get routes(): Router {
-    this.router.post("/", this.controller.createSchedule);
-    this.router.put("/:id", this.controller.updateSchedule);
-    this.router.delete("/:id", this.controller.deleteSchedule);
-    this.router.get("/travel/:travelId", this.controller.getSchedules);
+    this.router.get("/:id", (req, res, next) =>
+      this.controller.getSchedule(req, res, next)
+    );
+    this.router.post("/:travelId", (req, res, next) =>
+      this.controller.createSchedule(req, res, next)
+    );
+    this.router.put("/:id", (req, res, next) =>
+      this.controller.updateSchedule(req, res, next)
+    );
+    this.router.delete("/:id", (req, res, next) =>
+      this.controller.deleteSchedule(req, res, next)
+    );
+    this.router.get("/travel/:travelId", (req, res, next) =>
+      this.controller.getSchedules(req, res, next)
+    );
     return this.router;
   }
 }

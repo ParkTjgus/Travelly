@@ -1,18 +1,23 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { ScheduleRepository } from "../repositories/ScheduleRepository.js";
 import { ScheduleData } from "../types/ScheduleData";
 import { CustomError } from "../utils/CustomError.js";
+import { TravelModel } from "../models/Travel.js";
 
 export class ScheduleService {
   constructor(private repository: ScheduleRepository) {}
 
   async createSchedule(travelId: string, data: ScheduleData) {
     try {
-      return await this.repository.create(travelId, {
+      const travel = await TravelModel.findOne({ id: travelId });
+      if (!travel)
+        throw new CustomError(404, "NOT_FOUND", "여행을 찾을 수 없습니다.");
+
+      return await this.repository.create(travel._id, {
         ...data,
-        id: new mongoose.Types.ObjectId().toString(),
       });
-    } catch {
+    } catch (err) {
+      if (err instanceof CustomError) throw err;
       throw new CustomError(
         500,
         "CREATION_FAILED",
@@ -22,7 +27,8 @@ export class ScheduleService {
   }
 
   async updateSchedule(id: string, data: ScheduleData) {
-    const updated = await this.repository.update(id, data);
+    const scheduleId = new mongoose.Types.ObjectId(id);
+    const updated = await this.repository.update(scheduleId, data);
     if (!updated) {
       throw new CustomError(404, "NOT_FOUND", "일정을 찾을 수 없습니다.");
     }
@@ -30,7 +36,8 @@ export class ScheduleService {
   }
 
   async deleteSchedule(id: string) {
-    const deleted = await this.repository.delete(id);
+    const scheduleId = new mongoose.Types.ObjectId(id);
+    const deleted = await this.repository.delete(scheduleId);
     if (!deleted) {
       throw new CustomError(404, "NOT_FOUND", "일정을 찾을 수 없습니다.");
     }
@@ -39,5 +46,14 @@ export class ScheduleService {
 
   async getSchedules(travelId: string) {
     return await this.repository.findByTravelId(travelId);
+  }
+
+  async getSchedule(id: string) {
+    const scheduleId = new mongoose.Types.ObjectId(id);
+    const schedule = await this.repository.findById(scheduleId);
+    if (!schedule) {
+      throw new CustomError(404, "NOT_FOUND", "일정을 찾을 수 없습니다.");
+    }
+    return schedule;
   }
 }

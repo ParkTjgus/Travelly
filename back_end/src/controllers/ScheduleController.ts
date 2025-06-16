@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { ScheduleService } from "../services/ScheduleService.js";
+import { CustomResponse } from "../utils/CustomResponse.js";
 
 export class ScheduleController {
   constructor(private service: ScheduleService) {}
@@ -10,7 +11,8 @@ export class ScheduleController {
         req.params.travelId,
         req.body
       );
-      res.status(201).json({ success: true, data: schedule, error: null });
+      const response = new CustomResponse(true, schedule, null);
+      res.status(201).json(response);
     } catch (err) {
       next(err);
     }
@@ -22,7 +24,8 @@ export class ScheduleController {
         req.params.id,
         req.body
       );
-      res.status(200).json({ success: true, data: updated, error: null });
+      const response = new CustomResponse(true, updated, null);
+      res.status(200).json(response);
     } catch (err) {
       next(err);
     }
@@ -31,7 +34,12 @@ export class ScheduleController {
   async deleteSchedule(req: Request, res: Response, next: NextFunction) {
     try {
       await this.service.deleteSchedule(req.params.id);
-      res.status(200).json({ success: true, data: true, error: null });
+      const response = new CustomResponse(
+        true,
+        { message: "삭제 완료되었습니다." },
+        null
+      );
+      res.status(200).json(response);
     } catch (err) {
       next(err);
     }
@@ -40,7 +48,18 @@ export class ScheduleController {
   async getSchedules(req: Request, res: Response, next: NextFunction) {
     try {
       const schedules = await this.service.getSchedules(req.params.travelId);
-      res.status(200).json({ success: true, data: schedules, error: null });
+      const response = new CustomResponse(true, schedules, null);
+      res.status(200).json(response);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getSchedule(req: Request, res: Response, next: NextFunction) {
+    try {
+      const schedules = await this.service.getSchedule(req.params.id);
+      const response = new CustomResponse(true, schedules, null);
+      res.status(200).json(response);
     } catch (err) {
       next(err);
     }
