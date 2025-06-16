@@ -1,8 +1,14 @@
 import Button from "./Button";
 import Logo from "../../assets/Travelly_logo.svg";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/"); // Login 페이지로 이동
+  };
+
   return (
     <header
       className="px-[72px] h-[88px] border-b-1 border-[#D1D1D6] min-w-screen
@@ -25,6 +31,7 @@ const Header = () => {
           type="button"
           label="로그아웃"
           buttonStyle="px-8 py-4 border border-point"
+          onActionClick={handleLogout}
         />
       </div>
     </header>
