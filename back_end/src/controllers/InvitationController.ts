@@ -43,7 +43,13 @@ export class InvitationController {
   ) => {
     try {
       const success = await this.service.declineInvitation(req.params.id);
-      res.json(new CustomResponse(true, success, null));
+      res.json(
+        new CustomResponse(
+          true,
+          { message: "초대가 거절 처리되었습니다." },
+          null
+        )
+      );
     } catch (err) {
       next(err);
     }
