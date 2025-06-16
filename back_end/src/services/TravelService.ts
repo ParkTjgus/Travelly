@@ -24,7 +24,6 @@ export class TravelService {
       location,
       startDate,
       endDate,
-      schedules: [],
     });
     return newTravel;
   }

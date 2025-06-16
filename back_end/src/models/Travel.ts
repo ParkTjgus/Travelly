@@ -8,7 +8,6 @@ class Travel {
     location: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    schedules: [{ type: mongoose.Schema.Types.ObjectId, ref: "Schedule" }],
   });
 
   public model = mongoose.model("Travel", this.schema);
