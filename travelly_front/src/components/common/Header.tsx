@@ -1,6 +1,7 @@
 import Button from "./Button";
 import Logo from "../../assets/Travelly_logo.svg";
 import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -8,6 +9,16 @@ const Header = () => {
   const handleLogout = () => {
     navigate("/"); // Login 페이지로 이동
   };
+
+  // const handleInvitaions = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `/api/invitations/${localStorage.getItem("userId")}`
+  //     );
+  //   } catch (err) {
+  //     alert(err);
+  //   }
+  // };
 
   return (
     <header

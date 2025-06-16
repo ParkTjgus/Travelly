@@ -39,3 +39,6 @@ services:
     stdin_open: true
     tty: true
     command: ["yarn", "dev", "--host"]
+
+volumes:
+  mongo_data:

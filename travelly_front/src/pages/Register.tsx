@@ -64,7 +64,7 @@ const Register = () => {
             />
             <Button
               label="중복 확인"
-              type="submit"
+              type="button"
               onActionClick={() => checkDuplicationId(id)}
               buttonStyle="bg-main w-[114px] px-4 h-[75px] text-point text-[20px] font-normal"
             />
