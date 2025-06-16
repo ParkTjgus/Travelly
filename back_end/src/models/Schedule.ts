@@ -7,10 +7,11 @@ class Schedule {
       ref: "Travel",
       required: true,
     },
-    title: { type: String, required: true },
-    description: String,
-    date: { type: Date, required: true },
-    location: String,
+    content: { type: String, required: true },
+    startDate: { type: Date, required: true },
+    startTime: { type: String, required: true }, // 예: "09:30"
+    endTime: { type: String, required: true }, // 예: "14:00"
+    price: Number,
   });
 
   public model = mongoose.model("Schedule", this.schema);
