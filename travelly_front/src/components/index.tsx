@@ -3,3 +3,6 @@ export { default as Button } from "./common/Button";
 
 export { default as StepHeadline } from "./newTravel/StepHeadline";
 export { default as Calendar } from "./newTravel/Calendar";
+
+export { default as TravelInfo } from "./travel/TravelInfo";
+export { default as ScheduleInfo } from "./travel/ScheduleInfo";

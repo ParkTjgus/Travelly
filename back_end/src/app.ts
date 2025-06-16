@@ -50,11 +50,11 @@ const scheduleController = new ScheduleController(scheduleService);
 const invitationController = new InvitationController(invitationService);
 
 // Routes
-app.use("/auth", new AuthRoutes(authController).routes);
-app.use("/users", new UserRoutes(userController).routes);
-app.use("/travels", new TravelRoutes(travelController).routes);
-app.use("/schedules", new ScheduleRoutes(scheduleController).routes);
-app.use("/invitations", new InvitationRoutes(invitationController).routes);
+app.use("/api/auth", new AuthRoutes(authController).routes);
+app.use("/api/users", new UserRoutes(userController).routes);
+app.use("/api/travels", new TravelRoutes(travelController).routes);
+app.use("/api/schedules", new ScheduleRoutes(scheduleController).routes);
+app.use("/api/invitations", new InvitationRoutes(invitationController).routes);
 
 // Error Handler
 app.use(

@@ -12,6 +12,9 @@ const IconList: Record<string, keyof typeof Octicons> = {
   right: "GoChevronRight",
   left: "GoChevronLeft",
   down: "GoTriangleDown",
+  trash: "GoTrash",
+  plus: "GoPlus",
+  edit: "GoPencil",
 };
 
 const Icon = (props: IconProps) => {

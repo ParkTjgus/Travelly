@@ -3,6 +3,8 @@ interface InputFieldProps {
   placeholder?: string;
   disabled?: boolean;
   inputStyle?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputField = (props: InputFieldProps) => {
@@ -12,7 +14,9 @@ const InputField = (props: InputFieldProps) => {
       type={props.type}
       placeholder={props.placeholder}
       disabled={props.disabled}
-    ></input>
+      value={props.value}
+      onChange={props.onChange}
+    />
   );
 };
 

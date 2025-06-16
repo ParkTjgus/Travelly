@@ -15,18 +15,27 @@ services:
       ["sh", "-c", "mongod --bind_ip_all --auth --quiet > /dev/null 2>&1"]
 
   backend:
-    build: .
+    build:
+      context: ./back_end
+      dockerfile: Dockerfile
     container_name: backend
     ports:
       - "3000:3000"
     depends_on:
       - mongo
-    # volumes:
-    #   - .:/app
-    #   - /app/node_modules
-    #   - /app/dist
     environment:
       - MONGO_URI=mongodb://root:1234@mongo:27017
 
-volumes:
-  mongo_data:
+  frontend:
+    build:
+      context: ./travelly_front
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./travelly_front:/app
+      - /app/node_modules # 컨테이너 내부 의존성 캐시
+    stdin_open: true
+    tty: true
+    command: ["yarn", "dev", "--host"]
